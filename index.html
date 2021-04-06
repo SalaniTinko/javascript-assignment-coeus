@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>JS Assignment</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="abc.css" />
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+
+                <h1 class="text-center mt-5">Assignment javascript</h1>
+                <div class="row mb-5">
+                    <div class=" col-sm-6">
+                        <button class="btn btn-outline-secondary w-100" onclick="Myfunction()" type="button">Add a new Product</button>
+                    </div>
+                    <div class="col-sm-6">
+                        <button class="btn btn-outline-secondary w-100 rounded" onclick="Removefun()" type="button">Clear All</button>
+
+                    </div>
+                </div>
+                <div id="Result"></div>
+
+                <div id="div2" class="w-100 p-0 m-0">
+                    
+                    <div id="div1" class="w-100">
+                        
+
+                        </div>
+                    
+                </div>
+
+            </div>
+            <div class="col-sm-4"></div>
+        </div>
+    </div>
+
+    <script>
+        var Counter = 0;
+        var SumofAll;
+        
+        /*    function CalCulation(){
+             //   console.log("Function Call");
+            var Cvar = document.getElementsByClassName("C2");
+        //        Cvar.forEach(Fun);
+                function FUn(ind)
+                function Fun(){
+                    console.log
+                }
+                console.log(Cvar[0].value);
+                //    Cvar.forEach(priceCal;
+                
+            function priceCal(item,index){
+                    
+                console.log(index);
+                console.log(item);
+                
+            }
+               // console.log(C[0].value);
+            }
+            */
+        
+        function CalCulation(){
+            SumofAll=0;
+            
+            var C2 = document.getElementsByClassName("C2");
+            var C3 = document.getElementsByClassName("C3");
+            for( var i=0; i< C2.length; i++){
+                console.log(C2[i].value);
+                console.log(C3[i].value);
+                var Sum = C2[i].value*C3[i].value;
+                SumofAll+=Sum;
+                console.log(Sum);
+            }
+            console.log(SumofAll);
+            document.getElementById("Result").innerHTML=SumofAll;
+            
+        }
+        
+        function RemoveCld(a){
+//            var Rv = document.getElementById("div1");
+//            
+//            //Working But Only First index      
+//            if ( Rv.childElementCount >1){
+//                        Rv.children[0].remove();
+//                    }
+//            
+              a.parentElement.remove();
+              CalCulation();
+                }
+        
+        function Removefun() {
+                var parObj = document.getElementById("div1");
+                parObj.innerHTML = "";
+                Counter = 0;
+                document.getElementById("Result").innerHTML=" ";
+                console.log(Counter);
+            }
+
+        function CreateInputElement(field_type, field_class, placehol,typee) {
+            var v = document.createElement(field_type);
+            v.setAttribute("class", field_class);
+            v.setAttribute("type",typee);
+            v.setAttribute("placeholder", placehol);
+            v.setAttribute("required","required");
+            ++Counter;
+            return v;
+        }
+
+
+        function CreateBreak() {
+            var v = document.createElement("br");
+            return v;
+        }
+
+    
+        function CreateBBtn() {
+            var A = document.createElement("a");
+            A.setAttribute("href", "#");
+            A.setAttribute("onclick","RemoveCld(this)");
+            A.setAttribute("style","position:absolute;margin:-12px;color:#888;");
+            //Btn.appendChild
+            var i = document.createElement("i");
+            i.setAttribute("class","fa fa-times")
+            A.appendChild(i);
+            //Btn.innerHTML=i;
+            return A;
+        }
+
+        function CreateBtn(val, val1) {
+            var btn = document.createElement("button");
+            btn.setAttribute("id", val);
+            btn.setAttribute("class", "btn btn-secondary w-100");
+            btn.setAttribute("type", "submit");
+            btn.setAttribute("onclick", "CalCulation()");
+            btn.innerText = val1;
+            return btn;
+        }
+
+        function Myfunction() {
+
+            var Di = document.createElement("div");
+
+            var v1 = CreateInputElement("input", "C1", "Product Name","text");
+            var v2 = CreateInputElement("input", "C2", "Cost Per unit","Number");
+            var v3 = CreateInputElement("input", "C3", "No.of product","Number");
+
+            
+            Di.prepend(CreateBreak());
+            Di.prepend(CreateBreak());
+            Di.prepend(v3);
+            Di.prepend(CreateBreak());
+            Di.prepend(v2);
+            Di.prepend(CreateBreak());
+            Di.prepend(v1);
+            Di.prepend(CreateBBtn());
+            document.getElementById("div1").prepend(Di);
+            console.log(Counter);
+            if (Counter <= 3) {
+                document.getElementById("div1").appendChild(CreateBtn("Cal", "Calculate"));
+                console.log("Inner Scope of IF Condition");
+            } else {
+                return null;
+            }
+        }
+    </script>
+</body></html>
