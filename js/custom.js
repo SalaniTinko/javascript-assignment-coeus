@@ -3,19 +3,19 @@ var sumOfAll;
 
 function calculation() {
     sumOfAll = 0;
-    var costPerUnit = document.getElementsByClassName("cost-per-unit");
-    var noOfProduct = document.getElementsByClassName("no-of-product");
+    var costPerUnits = document.getElementsByClassName("cost-per-unit");
+    var noOfProducts = document.getElementsByClassName("no-of-product");
     
-    for (var inputField = 0; inputField < costPerUnit.length; inputField++) {
-        var sum = costPerUnit[inputField].value * noOfProduct[inputField].value;
+    for (var inputField = 0; inputField < costPerUnits.length; inputField++) {
+        var sum = costPerUnits[inputField].value * noOfProducts[inputField].value;
         sumOfAll += sum;
     }
     document.getElementById("Result").innerHTML = sumOfAll;
 
 }
 
-function RemoveElement(remove_btn) {
-    remove_btn.parentElement.remove();
+function removeElement(anchorTag) {
+    anchorTag.parentElement.remove();
     calculation();
 }
 
@@ -26,65 +26,65 @@ function removeAllField() {
 }
 
 function createInputElement(field_type, field_class, field_placeholder, type) {
-    var input_field = document.createElement(field_type);
-    input_field.setAttribute("class", field_class);
-    input_field.setAttribute("type", type);
-    input_field.setAttribute("placeholder", field_placeholder);
-    input_field.setAttribute("required", "required");
+    var inputTag = document.createElement(field_type);
+ 
+    inputTag.setAttribute("class", field_class);
+    inputTag.setAttribute("type", type);
+    inputTag.setAttribute("placeholder", field_placeholder);
+    inputTag.setAttribute("required", "required");
     ++counter;
 
-    return input_field;
+    return inputTag;
 }
 
 
 function createBreakSpace() {
-    var input_field = document.createElement("br");
+    var brTag = document.createElement("br");
 
-    return input_field;
+    return brTag;
 }
 
-
 function createRemoveButton() {
-    var remove_btn = document.createElement("a");
-    remove_btn.setAttribute("href", "#");
-    remove_btn.setAttribute("onclick", "RemoveElement(this)");
-    remove_btn.setAttribute("style", "position:absolute;margin:-12px;color:#888;");
-    var icon_tag = document.createElement("i");
-    remove_btn.setAttribute("class", "fa fa-times")
-    remove_btn.appendChild(icon_tag);
+    var anchorTag = document.createElement("a"); 
 
-    return remove_btn;
+    anchorTag.setAttribute("href", "#");
+    anchorTag.setAttribute("onclick", "removeElement(this)");
+    anchorTag.setAttribute("style", "position:absolute;margin:-12px;color:#888;");
+    var iconTag = document.createElement("i");
+    anchorTag.setAttribute("class", "fa fa-times")
+    anchorTag.appendChild(iconTag);
+
+    return anchorTag;
 }
 
 function createCalculationButton(id,clickAttr) { //id and onclick attribute
-    var btn = document.createElement("button");
-    console.log("value var\t\t:\t",id,clickAttr)
-    btn.setAttribute("id", id);
-    btn.setAttribute("class", "btn btn-secondary w-100");
-    btn.setAttribute("type", "submit");
-    btn.setAttribute("onclick", "calculation()");
-    btn.innerText = clickAttr;
+    var calculateButtonTag = document.createElement("button"); //create calculate button tag
+    calculateButtonTag.setAttribute("id", id);
+    calculateButtonTag.setAttribute("class", "btn btn-secondary w-100");
+    calculateButtonTag.setAttribute("type", "submit");
+    calculateButtonTag.setAttribute("onclick", "calculation()");
+    calculateButtonTag.innerText = clickAttr;
 
-    return btn;
+    return calculateButton;
 }
 
 function addCustomField() {
 
-    var add_custome_field = document.createElement("customField");
+    var divElement = document.createElement("div");
 
-    var product_name = createInputElement("input", "product-name", "product name", "text");
-    var cost_per_unit = createInputElement("input", "cost-per-unit", "Cost Per unit", "Number");
-    var no_of_product = createInputElement("input", "no-of-product", "no.of product", "Number");
+    var productName = createInputElement("input", "product-name", "product name", "text");
+    var costPerUnit = createInputElement("input", "cost-per-unit", "Cost Per unit", "Number");
+    var noOfProduct = createInputElement("input", "no-of-product", "no.of product", "Number");
 
-    add_custome_field.prepend(createBreakSpace());
-    add_custome_field.prepend(createBreakSpace());
-    add_custome_field.prepend(no_of_product);
-    add_custome_field.prepend(createBreakSpace());
-    add_custome_field.prepend(cost_per_unit);
-    add_custome_field.prepend(createBreakSpace());
-    add_custome_field.prepend(product_name);
-    add_custome_field.prepend(createRemoveButton());
-    document.getElementById("customChildField").prepend(add_custome_field);
+    divElement.prepend(createBreakSpace());
+    divElement.prepend(createBreakSpace());
+    divElement.prepend(noOfProduct);
+    divElement.prepend(createBreakSpace());
+    divElement.prepend(costPerUnit);
+    divElement.prepend(createBreakSpace());
+    divElement.prepend(productName);
+    divElement.prepend(createRemoveButton());
+    document.getElementById("customChildField").prepend(divElement);
 
     if (counter <= 3) {
         document.getElementById("customChildField").appendChild(createCalculationButton("Cal", "Calculate"));
