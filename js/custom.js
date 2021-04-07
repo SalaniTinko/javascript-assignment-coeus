@@ -1,53 +1,53 @@
-var Counter = 0;
-var SumofAll;
+var counter = 0;
+var sumOfAll;
 
-function CalCulation() {
-    SumofAll = 0;
-    var C2 = document.getElementsByClassName("C2");
-    var C3 = document.getElementsByClassName("C3");
+function calculation() {
+    sumOfAll = 0;
+    var costPerUnit = document.getElementsByClassName("cost-per-unit");
+    var noOfProduct = document.getElementsByClassName("no-of-product");
     
-    for (var i = 0; i < C2.length; i++) {
-        var Sum = C2[i].value * C3[i].value;
-        SumofAll += Sum;
+    for (var i = 0; i < costPerUnit.length; i++) {
+        var Sum = costPerUnit[i].value * noOfProduct[i].value;
+        sumOfAll += Sum;
     }
-    document.getElementById("Result").innerHTML = SumofAll;
+    document.getElementById("Result").innerHTML = sumOfAll;
 
 }
 
-function RemoveCld(a) {
+function RemoveElement(a) {
     a.parentElement.remove();
-    CalCulation();
+    calculation();
 }
 
-function Removefun() {
-    document.getElementById("div1").innerHTML = "";
+function removeAllField() {
+    document.getElementById("customChildField").innerHTML = "";
     document.getElementById("Result").innerHTML = " ";
-    Counter = 0;
+    counter = 0;
 }
 
-function CreateInputElement(field_type, field_class, placehol, typee) {
+function createInputElement(field_type, field_class, placehol, typee) {
     var v = document.createElement(field_type);
     v.setAttribute("class", field_class);
     v.setAttribute("type", typee);
     v.setAttribute("placeholder", placehol);
     v.setAttribute("required", "required");
-    ++Counter;
+    ++counter;
 
     return v;
 }
 
 
-function CreateBreak() {
+function createBreakSpace() {
     var v = document.createElement("br");
 
     return v;
 }
 
 
-function CreateBBtn() {
+function createRemoveButton() {
     var A = document.createElement("a");
     A.setAttribute("href", "#");
-    A.setAttribute("onclick", "RemoveCld(this)");
+    A.setAttribute("onclick", "RemoveElement(this)");
     A.setAttribute("style", "position:absolute;margin:-12px;color:#888;");
     var i = document.createElement("i");
     i.setAttribute("class", "fa fa-times")
@@ -56,37 +56,37 @@ function CreateBBtn() {
     return A;
 }
 
-function CreateBtn(val, val1) {
+function createCalculationButton(val, val1) {
     var btn = document.createElement("button");
     btn.setAttribute("id", val);
     btn.setAttribute("class", "btn btn-secondary w-100");
     btn.setAttribute("type", "submit");
-    btn.setAttribute("onclick", "CalCulation()");
+    btn.setAttribute("onclick", "calculation()");
     btn.innerText = val1;
 
     return btn;
 }
 
-function Myfunction() {
+function addCustomField() {
 
-    var Di = document.createElement("div");
+    var Di = document.createElement("customField");
 
-    var v1 = CreateInputElement("input", "C1", "Product Name", "text");
-    var v2 = CreateInputElement("input", "C2", "Cost Per unit", "Number");
-    var v3 = CreateInputElement("input", "C3", "No.of product", "Number");
+    var product_name = createInputElement("input", "product-name", "product name", "text");
+    var cost_per_unit = createInputElement("input", "cost-per-unit", "Cost Per unit", "Number");
+    var no_of_product = createInputElement("input", "no-of-product", "no.of product", "Number");
 
-    Di.prepend(CreateBreak());
-    Di.prepend(CreateBreak());
-    Di.prepend(v3);
-    Di.prepend(CreateBreak());
-    Di.prepend(v2);
-    Di.prepend(CreateBreak());
-    Di.prepend(v1);
-    Di.prepend(CreateBBtn());
-    document.getElementById("div1").prepend(Di);
+    Di.prepend(createBreakSpace());
+    Di.prepend(createBreakSpace());
+    Di.prepend(no_of_product);
+    Di.prepend(createBreakSpace());
+    Di.prepend(cost_per_unit);
+    Di.prepend(createBreakSpace());
+    Di.prepend(product_name);
+    Di.prepend(createRemoveButton());
+    document.getElementById("customChildField").prepend(Di);
 
-    if (Counter <= 3) {
-        document.getElementById("div1").appendChild(CreateBtn("Cal", "Calculate"));
+    if (counter <= 3) {
+        document.getElementById("customChildField").appendChild(createCalculationButton("Cal", "Calculate"));
     } else {
         return null;
     }
