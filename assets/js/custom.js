@@ -1,27 +1,27 @@
 $(document).ready(function() {
   // for datatable
-  let table = $('#tableInfo').DataTable({
+        let table = $('#tableInfo').DataTable({
+        });
+        $('#tableInfo').on("click", "button", function(){
+          swal({
+        title: "Are you sure ??",
+        text: "Click on delete button to delete permanently",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+      if (willDelete) {
+        // Delete Row from datatable
+        table.row($(this).parents('tr')).remove().draw(false);
+        swal("Poof! Your imaginary data has been deleted!", {
+          icon: "success",
+        });
+      } else {
+        swal("Your imaginary data is safe!");
+      }
+      });
   });
-  $('#tableInfo').on("click", "button", function(){
-    swal({
-  title: "Are you sure ??",
-  text: "Click on delete button to delete permanently",
-  icon: "warning",
-  buttons: true,
-  dangerMode: true,
-})
-.then((willDelete) => {
-if (willDelete) {
-  // Delete Row from datatable
-  table.row($(this).parents('tr')).remove().draw(false);
-  swal("Poof! Your imaginary data has been deleted!", {
-    icon: "success",
-  });
-} else {
-  swal("Your imaginary data is safe!");
-}
-});
-});
 });
 let counter = 1;
 // textbox validation
