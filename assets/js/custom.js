@@ -2,7 +2,7 @@ $(document).ready(function() {
   // for datatable
         let table = $('#tableInfo').DataTable({
         });
-        $('#tableInfo').on("click", "button", function(){
+        $('#tableInfo').on("click", "#deleteIp", function(){
           swal({
         title: "Are you sure ??",
         text: "Click on delete button to delete permanently",
@@ -43,7 +43,7 @@ function ValidateIPaddress(inputText)
                 data.ip,
                 data.country_name,
                 data.country_code,
-                "<td><button><i class='far fa-trash-alt'></i></button></td>",
+                "<td><a id='deleteIp'><i class='far fa-trash-alt'></i></a></td>",
                 ]).draw();
                 swal("Sucessfully!", "You enter the valid ip!", "success");
               Success = true;
